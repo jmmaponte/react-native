@@ -1,13 +1,25 @@
 const  express = require ('express')
+const  mongoose = require ('mongoose');
+const  platos  = require ('./Rutas/platos')
+const  ordenes = require ('./Rutas/ordenes');
+const  bodyParser = require('body-parser');
+const url = 'mongodb://localhost:27017/lunchdb'
 const  app = express()
 
-app.get ('*', (req, res) => {
-    console.log('HOLA S MI PRIMERA APP EN EL SERVER');
-     res.send({mensaje: 'hola chicos'})
 
-    app.listen(3000)
+mongoose.connect(url, {useNewUrlParser:true,  useUnifiedTopology: true })
+.then (db => console.log('conetado a mongodb'))
+.catch(err => console.log(err))
+
+app.use(bodyParser.json())
+app.use('/api/platos', platos)
+app.use('/api/ordenes', ordenes)
 
 
-})
+app.listen(3000, () => {
+console.log('estamos conectado a server 3000')
+});
 
-module.exports = app
+
+
+
