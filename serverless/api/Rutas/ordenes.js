@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
    router.get('/:id', (req, res) => {
     pedidos.findByid(req.params.id)
     .exec()
-    .then(i => res.status(201).send(i))
+    .then(i => res.status(200).send(i))
       })
       // ahara  vamos a crear un elemento ()... 
      router.post('/', (req, res) => {
